@@ -160,4 +160,66 @@ class Wp_Animated_Facts_Admin {
     public function register_custom_columns($columns){
         return array_merge($columns, ['af_shortcode' => 'Shortcode']);
     }
+
+    /**
+     * Register metabox
+     */
+    public function register_metabox(){
+        // Start with an underscore to hide fields from custom fields list
+        $prefix = '_af_';
+
+        /**
+         * Initiate the metabox
+         */
+        $main_group = new_cmb2_box([
+            'id'            => $prefix . 'fact_metabox',
+            'title'         => __( 'Manage Facts', 'wp-animated-facts' ),
+            'object_types'  => ['animated_facts']
+        ]);
+
+        $fact_group = $main_group->add_field([
+            'id' => $prefix . 'fact_group',
+            'type' => 'group',
+            'options' => [
+                'group_title' => __('Fact {#}', 'wp-animated-facts' ),
+                'add_button' => __('Add another fact', 'wp-animated-facts' ),
+                'remove_button' => __('Remove fact', 'wp-animated-facts' ),
+                'sortable' => true,
+                'single' => false,
+            ]
+        ]);
+
+        $main_group->add_group_field( $fact_group, [
+            'name' => __( 'Fact header', 'wp-animated-facts' ),
+            'id' => $prefix . 'head_header',
+            'type' => 'title'
+        ]);
+
+        $main_group->add_group_field( $fact_group, [
+            'name' => __( 'Title', 'wp-animated-facts' ),
+            'id' => $prefix . 'title',
+            'type' => 'text',
+            'sanitization_cb' => 'wp_kses_post'
+        ]);
+
+        $main_group->add_group_field( $fact_group, [
+            'name' => __( 'Icon code', 'wp-animated-facts' ),
+            'id' => $prefix . 'icon_code',
+            'type' => 'textarea_small'
+        ]);
+
+        $main_group->add_group_field( $fact_group, [
+            'name' => __( 'Value', 'wp-animated-facts' ),
+            'id' => $prefix . 'value',
+            'type' => 'text',
+            'sanitization_cb' => 'wp_kses_post'
+        ]);
+
+        $main_group->add_group_field( $fact_group, [
+        'name' => __( 'Date multiplier', 'wp-animated-facts' ),
+            'desc' => __( 'Value will be multiplied with number of days since selected date.', 'wp-animated-facts' ),
+            'id' => $prefix . 'value_date_multiplier',
+            'type' => 'text_date_timestamp',
+        ]);
+    }
 }
