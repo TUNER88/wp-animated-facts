@@ -119,6 +119,15 @@ class Wp_Animated_Facts {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-animated-facts-public.php';
 
+        /**
+         * CMB2 toolkit
+         */
+        if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
+            require_once dirname( __FILE__ ) . '/cmb2/init.php';
+        } elseif ( file_exists( dirname( __FILE__ ) . '/CMB2/init.php' ) ) {
+            require_once dirname( __FILE__ ) . '/CMB2/init.php';
+        }
+
 		$this->loader = new Wp_Animated_Facts_Loader();
 
 	}

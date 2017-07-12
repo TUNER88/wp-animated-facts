@@ -1,0 +1,4 @@
+[submodule "includes/CMB2"]
+	path = includes/CMB2
+	url = git@github.com:CMB2/CMB2.git
+	branch = master
