@@ -97,7 +97,42 @@ class Wp_Animated_Facts_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-animated-facts-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
+
+    /**
+     * Register custom post type
+     */
+	public function register_post_type(){
+        $labels = [
+            'name'               => __('Animated Fact Lists', 'wp-animated-facts'),
+            'singular_name'      => __('Animated Fact List', 'wp-animated-facts'),
+            'menu_name'          => __('Animated Facts', 'wp-animated-facts'),
+            'name_admin_bar'     => __('Fact List', 'wp-animated-facts'),
+            'add_new'            => __('Add New List', 'wp-animated-facts'),
+            'add_new_item'       => __('Add New Fact List', 'wp-animated-facts'),
+            'new_item'           => __('New Fact List', 'wp-animated-facts'),
+            'edit_item'          => __('Edit Fact List', 'wp-animated-facts'),
+            'view_item'          => __('View Fact List', 'wp-animated-facts'),
+            'all_items'          => __('All Fact Lists', 'wp-animated-facts'),
+            'search_items'       => __('Search Fact Lists', 'wp-animated-facts'),
+            'not_found'          => __('No Fact Lists found.', 'wp-animated-facts'),
+            'not_found_in_trash' => __('No Fact Lists found in Trash.', 'wp-animated-facts')
+        ];
+
+        $args = [
+            'labels'             => $labels,
+            'public'             => false,
+            'publicly_queryable' => false,
+            'show_ui'            => true,
+            'show_in_admin_bar'  => false,
+            'capability_type'    => 'post',
+            'has_archive'        => false,
+            'hierarchical'       => false,
+            'supports'           => ['title'],
+            'menu_icon'          => 'dashicons-slides'
+        ];
+
+        register_post_type( 'animated_facts', $args );
+    }
 
 }
