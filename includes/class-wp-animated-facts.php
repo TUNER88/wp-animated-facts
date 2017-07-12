@@ -161,6 +161,8 @@ class Wp_Animated_Facts {
 		$plugin_admin = new Wp_Animated_Facts_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_type' );
+		$this->loader->add_filter( 'manage_animated_facts_posts_columns', $plugin_admin, 'register_custom_columns' );
+		$this->loader->add_action( 'manage_animated_facts_posts_custom_column', $plugin_admin, 'render_post_columns', 10, 2 );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

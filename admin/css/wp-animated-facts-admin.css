@@ -2,3 +2,12 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+.column-af_shortcode span.shortcode{
+    display:inline-block;
+    border:solid 2px lightgray;
+    background:white;
+    padding:0 8px;
+    font-size:13px;
+    line-height:25px;
+    vertical-align:middle;
+}

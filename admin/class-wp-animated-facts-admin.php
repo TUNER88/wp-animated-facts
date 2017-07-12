@@ -135,4 +135,29 @@ class Wp_Animated_Facts_Admin {
         register_post_type( 'animated_facts', $args );
     }
 
+    /**
+     * Render custom post columns
+     *
+     * @param $column
+     * @param $post_id
+     */
+    public function render_post_columns($column, $post_id){
+        switch ( $column ) {
+            case 'af_shortcode' :
+                global $post;
+                $shortCode = htmlspecialchars('[animated-facts id="'.$post->ID.'"]');
+                echo '<span class="shortcode">'.$shortCode.'</span>';
+                break;
+        }
+    }
+
+    /**
+     * Register custom columns
+     *
+     * @param $columns
+     * @return array
+     */
+    public function register_custom_columns($columns){
+        return array_merge($columns, ['af_shortcode' => 'Shortcode']);
+    }
 }
